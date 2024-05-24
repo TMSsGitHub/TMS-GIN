@@ -12,5 +12,5 @@ func main() {
 	r := gin.Default()
 	r.Use(middle.Resp)
 	router.UserRouter(r)
-	r.Run(fmt.Sprintf(":%s", config.Cfg.App.Port))
+	r.Run(fmt.Sprintf("%s:%s", config.Cfg.App.Host, config.Cfg.App.Port))
 }

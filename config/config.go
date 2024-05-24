@@ -7,15 +7,15 @@ import (
 )
 
 type Config struct {
-	App App      `yaml:"app"`
-	DB  Database `yaml:"database"`
+	App App
+	Db  Database
 }
 
 var Cfg Config
 
 func init() {
-	viper.SetConfigName("application")
-	viper.SetConfigType("yml")
+	viper.SetConfigName("application.ini")
+	viper.SetConfigType("ini")
 	viper.AddConfigPath("./")
 
 	if err := viper.ReadInConfig(); err != nil {
@@ -26,8 +26,6 @@ func init() {
 	if err := viper.Unmarshal(&Cfg); err != nil {
 		log.Fatalf("配置文件解析错误: %v", err)
 	}
-
-	fmt.Println(Cfg)
 
 	InitDB()
 }

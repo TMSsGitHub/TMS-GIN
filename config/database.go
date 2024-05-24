@@ -7,15 +7,15 @@ import (
 )
 
 type Database struct {
-	Driver    string `yaml:"driver"`
-	Host      string `yaml:"host"`
-	Port      int    `yaml:"port"`
-	User      string `yaml:"user"`
-	Password  string `yaml:"password"`
-	Name      string `yaml:"name"`
-	Charset   string `yaml:"charset"`
-	ParseTime bool   `yaml:"parseTime"`
-	Loc       string `yaml:"loc"`
+	Driver    string
+	Host      string
+	Port      int
+	User      string
+	Password  string
+	Name      string
+	Charset   string
+	ParseTime bool
+	Loc       string
 }
 
 var DB *gorm.DB
@@ -23,16 +23,15 @@ var DB *gorm.DB
 func InitDB() {
 	dsn := fmt.Sprintf(
 		"%s:%s@tcp(%s:%d)/%s?charset=%s&parseTime=%t&loc=%s",
-		Cfg.DB.User,
-		Cfg.DB.Password,
-		Cfg.DB.Host,
-		Cfg.DB.Port,
-		Cfg.DB.Name,
-		Cfg.DB.Charset,
-		Cfg.DB.ParseTime,
-		Cfg.DB.Loc,
+		Cfg.Db.User,
+		Cfg.Db.Password,
+		Cfg.Db.Host,
+		Cfg.Db.Port,
+		Cfg.Db.Name,
+		Cfg.Db.Charset,
+		Cfg.Db.ParseTime,
+		Cfg.Db.Loc,
 	)
-	fmt.Println("dsn:", dsn)
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
 		panic(err)
