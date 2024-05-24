@@ -1,12 +1,16 @@
 package main
 
 import (
-	"TMS-GIN/router"
+	"TMS-GIN/api/router"
+	"TMS-GIN/config"
+	"TMS-GIN/middleware"
+	"fmt"
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
 	r := gin.Default()
+	r.Use(middle.Resp)
 	router.UserRouter(r)
-	r.Run(":8080")
+	r.Run(fmt.Sprintf(":%s", config.Cfg.App.Port))
 }
