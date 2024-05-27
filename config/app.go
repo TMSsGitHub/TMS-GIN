@@ -1,6 +1,6 @@
 package config
 
 type App struct {
-	Host string
-	Port string
+	Host string `yml:"host"`
+	Port string `yml:"port"`
 }

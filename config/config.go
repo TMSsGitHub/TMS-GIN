@@ -7,25 +7,24 @@ import (
 )
 
 type Config struct {
-	App App
-	Db  Database
+	App *App      `mapstructure:"app"`
+	Db  *Database `mapstructure:"mysql"`
 }
 
 var Cfg Config
 
-func init() {
-	viper.SetConfigName("application.ini")
-	viper.SetConfigType("ini")
+func InitConfig() {
+	viper.SetConfigName("application.yml")
+	viper.SetConfigType("yml")
 	viper.AddConfigPath("./")
 
 	if err := viper.ReadInConfig(); err != nil {
 		fmt.Printf("配置文件读取错误, %s", err)
 		return
 	}
+	fmt.Println(Cfg)
 
 	if err := viper.Unmarshal(&Cfg); err != nil {
 		log.Fatalf("配置文件解析错误: %v", err)
 	}
-
-	InitDB()
 }

@@ -1,0 +1,16 @@
+app:
+  host: localhost
+  port: 10101
+
+mysql:
+  host: localhost
+  port: 3306
+  user: tms
+  password: mysql
+  table: tms_temp
+  charset: utf8mb4
+  parseTime: true
+  loc: Local
+
+  prefix: tb_
+  singularTable: true

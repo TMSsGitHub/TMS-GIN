@@ -5,9 +5,14 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func UserRouter(c *gin.Engine) {
+func InitAPIRouter(r *gin.Engine) {
+	userRouter(r)
+}
+
+func userRouter(c *gin.Engine) {
 	userRouter := c.Group("user")
 	{
 		userRouter.GET("/:username/:password", handler.GetUserInfo)
+		userRouter.POST("", handler.CreateUser)
 	}
 }
