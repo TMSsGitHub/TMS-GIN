@@ -1,7 +1,7 @@
 package main
 
 import (
-	"TMS-GIN/api/middleware"
+	middle "TMS-GIN/api/middleware"
 	"TMS-GIN/api/router"
 	"TMS-GIN/config"
 	"fmt"
@@ -11,7 +11,7 @@ import (
 func main() {
 	r := gin.Default()
 	// 注册中间件
-	r.Use(middle.Resp)
+	middle.InitMiddleware(r)
 	// 注册路由
 	router.InitAPIRouter(r)
 	// 初始化缓存

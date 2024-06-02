@@ -4,19 +4,20 @@ import (
 	"TMS-GIN/config"
 	"TMS-GIN/internal/common"
 	"TMS-GIN/internal/errors"
-	"TMS-GIN/model"
+	"TMS-GIN/internal/model"
 	"fmt"
 	"github.com/gin-gonic/gin"
 )
 
 func GetUserInfo(c *gin.Context) {
-	var user model.User
-	if err := c.ShouldBindQuery(&user); err != nil {
-		fmt.Println(err)
-		c.Error(errors.NewServerError("参数错误", err))
-		return
-	}
-	c.Set("resp", resp.Success(user))
+	c.Set(resp.RES, resp.Success("ok"))
+	//var user model.User
+	//if err := c.ShouldBindQuery(&user); err != nil {
+	//	fmt.Println(err)
+	//	c.Error(errors.NewServerError("参数错误", err))
+	//	return
+	//}
+	//c.Set("res", resp.Success(user))
 }
 
 func CreateUser(c *gin.Context) {
@@ -32,7 +33,7 @@ func CreateUser(c *gin.Context) {
 		c.Error(errors.NewServerError("新建用户失败", err))
 		return
 	}
-	c.Set("resp", resp.Success(user))
+	c.Set(resp.RES, resp.Success(user))
 }
 
 //func (con *UserController) Login(c *gin.Context) {}

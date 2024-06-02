@@ -6,6 +6,8 @@ type R struct {
 	Data any    `json:"data,omitempty"`
 }
 
+const RES = "res"
+
 func Success(data any) R {
 	return R{
 		Code: 200,
