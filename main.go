@@ -14,6 +14,7 @@ func main() {
 	middle.InitMiddleware(r)
 	// 注册路由
 	router.InitAPIRouter(r)
+	r.Static("static", "./static")
 	// 初始化缓存
 	// 初始化定时任务
 	// 启动后台任务
@@ -27,4 +28,5 @@ func init() {
 	// 初始化日志	还不知道怎么按日期和类型存文件
 	// 连接数据库
 	config.InitDB()
+	config.InitRedis()
 }

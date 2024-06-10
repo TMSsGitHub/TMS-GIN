@@ -20,7 +20,7 @@ func GetUserInfo(c *gin.Context) {
 	//c.Set("res", resp.Success(user))
 }
 
-func CreateUser(c *gin.Context) {
+func CreateUser(c *gin.Context) { // todo
 	var user model.User
 	if err := c.ShouldBindJSON(&user); err != nil {
 		fmt.Println(err)

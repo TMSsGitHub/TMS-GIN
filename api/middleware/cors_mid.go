@@ -11,7 +11,7 @@ func CorsMiddle() gin.HandlerFunc {
 		origin := c.Request.Header.Get("Origin")
 		if origin != "" {
 			// 生产环境中的服务端通常都不会填 *，应当填写指定域名
-			c.Header("Access-Control-Allow-Origin", origin)
+			c.Header("Access-Control-Allow-Origin", origin) // fixme 还没限制域名
 			// 允许使用的HTTP METHOD
 			c.Header("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE, UPDATE")
 			// 允许使用的请求头
@@ -27,6 +27,6 @@ func CorsMiddle() gin.HandlerFunc {
 			c.AbortWithStatus(http.StatusNoContent)
 		}
 		// 放行
-		c.Next()
+		//c.Next()
 	}
 }

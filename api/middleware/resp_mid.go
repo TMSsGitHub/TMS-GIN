@@ -2,7 +2,8 @@ package middle
 
 import (
 	"TMS-GIN/internal/common"
-	"TMS-GIN/internal/errors"
+	cusErr "TMS-GIN/internal/errors"
+	"errors"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )
@@ -15,9 +16,10 @@ func Resp(c *gin.Context) {
 	}()
 	c.Next()
 	for _, err := range c.Errors {
-		switch spcificErr := err.Err.(type) {
-		case errors.ServerError:
-			c.JSON(http.StatusOK, resp.FailWithCode(spcificErr.Code, spcificErr.Msg))
+		var serverErr cusErr.ServerError
+		switch {
+		case errors.As(err.Err, &serverErr):
+			c.JSON(http.StatusOK, resp.FailWithCode(serverErr.Code, serverErr.Msg))
 		default:
 			c.JSON(http.StatusOK, resp.Fail("服务器异常"))
 		}
@@ -28,6 +30,6 @@ func Resp(c *gin.Context) {
 	if res, ok := c.Get(resp.RES); ok {
 		c.JSON(http.StatusOK, res)
 	} else {
-		c.JSON(http.StatusInternalServerError, gin.H{})
+		//c.JSON(http.StatusInternalServerError, gin.H{})
 	}
 }

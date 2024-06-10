@@ -7,8 +7,10 @@ import (
 )
 
 type Config struct {
-	App *App      `mapstructure:"app"`
-	Db  *Database `mapstructure:"mysql"`
+	App   *App      `mapstructure:"app"`
+	Db    *Database `mapstructure:"mysql"`
+	Redis *Redis    `mapstructure:"redis"`
+	File  *File     `mapstructure:"file"`
 }
 
 var Cfg Config
@@ -22,9 +24,9 @@ func InitConfig() {
 		fmt.Printf("配置文件读取错误, %s", err)
 		return
 	}
-	fmt.Println(Cfg)
 
 	if err := viper.Unmarshal(&Cfg); err != nil {
 		log.Fatalf("配置文件解析错误: %v", err)
 	}
+	fmt.Println(Cfg.Redis)
 }
