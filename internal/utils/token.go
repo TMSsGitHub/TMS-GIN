@@ -11,6 +11,8 @@ type Claims struct {
 	jwt.RegisteredClaims
 }
 
+// GenerateAccessToken
+// 生成access_token
 func GenerateAccessToken(sub uint64, expires time.Duration) (string, error) {
 	claims := &Claims{
 		Subject: sub,

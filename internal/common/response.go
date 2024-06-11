@@ -1,12 +1,17 @@
 package resp
 
+const RES = "res"
+
+const (
+	NeedToLogin  = 444
+	LoginExpired = 445
+)
+
 type R struct {
 	Code int    `json:"code"`
-	Msg  string `json:"msg"`
+	Msg  string `json:"msg,omitempty"`
 	Data any    `json:"data,omitempty"`
 }
-
-const RES = "res"
 
 func Success(data any) R {
 	return R{

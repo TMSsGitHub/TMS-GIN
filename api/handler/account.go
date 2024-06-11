@@ -25,7 +25,7 @@ func Login(c *gin.Context) {
 	}
 
 	accountService := service.GetAccountService()
-	token, err := accountService.Login(account)
+	token, err := accountService.Login(&account)
 	if err != nil {
 		c.Error(err)
 		c.Abort()
@@ -35,7 +35,7 @@ func Login(c *gin.Context) {
 	c.Set(resp.RES, resp.Success(token))
 }
 
-func register(c *gin.Context) {
+func Register(c *gin.Context) {
 	var user model.User
 	if err := c.ShouldBindJSON(&user); err != nil {
 		fmt.Println(err)

@@ -4,6 +4,7 @@ import (
 	middle "TMS-GIN/api/middleware"
 	"TMS-GIN/api/router"
 	"TMS-GIN/config"
+	"TMS-GIN/internal/datastore"
 	"fmt"
 	"github.com/gin-gonic/gin"
 )
@@ -13,7 +14,7 @@ func main() {
 	// 注册中间件
 	middle.InitMiddleware(r)
 	// 注册路由
-	router.InitAPIRouter(r)
+	router.InitRouter(r)
 	r.Static("static", "./static")
 	// 初始化缓存
 	// 初始化定时任务
@@ -27,6 +28,6 @@ func init() {
 	config.InitConfig()
 	// 初始化日志	还不知道怎么按日期和类型存文件
 	// 连接数据库
-	config.InitDB()
-	config.InitRedis()
+	datastore.InitDB(config.Cfg.Db)
+	datastore.InitRedis(config.Cfg.Redis)
 }

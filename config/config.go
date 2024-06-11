@@ -28,5 +28,4 @@ func InitConfig() {
 	if err := viper.Unmarshal(&Cfg); err != nil {
 		log.Fatalf("配置文件解析错误: %v", err)
 	}
-	fmt.Println(Cfg.Redis)
 }
