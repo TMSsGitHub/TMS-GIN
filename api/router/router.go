@@ -3,6 +3,7 @@ package router
 import (
 	"TMS-GIN/api/handler"
 	middle "TMS-GIN/api/middleware"
+	log "TMS-GIN/internal"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )
@@ -11,6 +12,7 @@ import (
 func InitRouter(r *gin.Engine) {
 	// 找不到路由，重定向
 	r.NoRoute(func(c *gin.Context) {
+		log.Logger.Info("??")
 		c.Redirect(http.StatusFound, "https://www.baidu.com") // fixme 重定向地址需要更改
 	})
 	notAuthRouter(r)

@@ -4,6 +4,7 @@ import (
 	middle "TMS-GIN/api/middleware"
 	"TMS-GIN/api/router"
 	"TMS-GIN/config"
+	log "TMS-GIN/internal"
 	"TMS-GIN/internal/datastore"
 	"fmt"
 	"github.com/gin-gonic/gin"
@@ -27,6 +28,9 @@ func init() {
 	// 读取配置文件
 	config.InitConfig()
 	// 初始化日志	还不知道怎么按日期和类型存文件
+	log.InitLogger()
+	log.Logger.Info("项目启动成功")
+	log.Logger.Error("手动失败")
 	// 连接数据库
 	datastore.InitDB(config.Cfg.Db)
 	datastore.InitRedis(config.Cfg.Redis)
